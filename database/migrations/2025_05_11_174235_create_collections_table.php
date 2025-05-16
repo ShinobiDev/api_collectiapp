@@ -16,11 +16,11 @@ class CreateCollectionsTable extends Migration
         Schema::create('collections', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('gender_id')->constrained('genders');
             $table->foreignId('category_id')->constrained('categories');
             $table->foreignId('author_id')->constrained('authors');
-            $table->foreignId('tipe_id')->constrained('types');
+            $table->foreignId('type_id')->constrained('types');
             $table->foreignId('editorial_id')->constrained('editorials');
+            $table->integer('number_of_volumes');
             $table->timestamps();
         });
     }

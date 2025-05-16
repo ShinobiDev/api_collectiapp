@@ -9,4 +9,8 @@ class Gender extends Model
 {
     use HasFactory;
     protected $fillable = ['name'];
+    public function collections()
+    {
+        return $this->belongsToMany(Collection::class);
+    }
 }
