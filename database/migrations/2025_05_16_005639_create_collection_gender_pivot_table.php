@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTypesTable extends Migration
+class CreateCollectionGenderPivotTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('types', function (Blueprint $table) {
+        Schema::create('collection_gender', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->foreignId('parent_type_id')->nullable()->constrained('types');
+            $table->foreignId('collection_id')->constrained()->onDelete('cascade');
+            $table->foreignId('gender_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('types');
+        Schema::dropIfExists('collection_gender');
     }
 }

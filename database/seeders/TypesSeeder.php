@@ -14,19 +14,41 @@ class TypesSeeder extends Seeder
     public function run(): void
     {
         Type::create([
-            'name' => 'Terror'
+            'name' => 'Documentos'
         ]);
 
         Type::create([
-            'name' => 'Acción'
+            'name' => 'Cedula Ciudadania',
+            'parent_type_id' => 1
         ]);
 
         Type::create([
-            'name' => 'Comedia'
+            'name' => 'Cedula Extrajeria',
+            'parent_type_id' => 1
         ]);
 
         Type::create([
-            'name' => 'Shonen'
+            'name' => 'Tarjeta Identidad',
+            'parent_type_id' => 1
+        ]);
+
+        Type::create([
+            'name' => 'Passaporte',
+            'parent_type_id' => 1
+        ]);
+
+        Type::create([
+            'name' => 'Colletiones'
+        ]);
+
+        Type::create([
+            'name' => 'Especial',
+            'parent_type_id' => 6
+        ]);
+
+        Type::create([
+            'name' => 'Regular',
+            'parent_type_id' => 6
         ]);
     }
 }
