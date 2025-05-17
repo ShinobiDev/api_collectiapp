@@ -36,11 +36,14 @@ Collectiapp es una API innovadora diseñada para transformar la manera en que lo
    php artisan migrate
    ```
 
-- Llena la base de datos con datos iniciales (opcional):
+- Genera la clave secreta de JWT:
    ```bash
    php artisan db:seed
    ```
-
+- Llena la base de datos con datos iniciales:
+   ```bash
+   php artisan jwt:secret
+   ```
 - Inicia el servidor de desarrollo:
    ```bash
    php artisan serve
