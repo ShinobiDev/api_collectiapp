@@ -13,4 +13,4 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
-/dd_data
+/db_data
