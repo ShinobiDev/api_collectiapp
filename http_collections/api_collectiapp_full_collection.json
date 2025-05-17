@@ -1,0 +1,894 @@
+{
+  "info": {
+    "_postman_id": "api-collectiapp-all",
+    "name": "API Collectiapp (Full)",
+    "description": "Colección completa de endpoints de la API Collectiapp, organizada por recursos y controladores. Incluye autenticación JWT, endpoints CRUD para usuarios, roles, tipos, estados, géneros, autores, categorías, editoriales y colecciones. Utiliza variables de entorno para la URL base, puerto y token.\n\n### Variables de entorno necesarias para Postman\n\nDebes declarar las siguientes variables en tu entorno de Postman para que las peticiones funcionen correctamente:\n\n- `base_url`: URL base de la API (ejemplo: http://127.0.0.1)\n- `port`: Puerto donde corre la API (ejemplo: 8000)\n- `token`: Token JWT obtenido tras hacer login o register\n\nEstas variables se usan en las rutas de la colección como `{{base_url}}:{{port}}/api/...` y en el header Authorization como `Bearer {{token}}`.\n\nRecuerda actualizar el valor de `token` cada vez que obtengas uno nuevo.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"johndoe@example.com\",\n  \"password\": \"password123\",\n  \"password_confirmation\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}:{{port}}/api/register",
+              "host": ["{{base_url}}"],
+              "port": "{{port}}",
+              "path": ["api", "register"]
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"johndoe@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}:{{port}}/api/login",
+              "host": ["{{base_url}}"],
+              "port": "{{port}}",
+              "path": ["api", "login"]
+            }
+          }
+        },
+        {
+          "name": "Refresh Token",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{base_url}}:{{port}}/api/refresh",
+              "host": ["{{base_url}}"],
+              "port": "{{port}}",
+              "path": ["api", "refresh"]
+            }
+          }
+        },
+        {
+          "name": "Get User (Token Protected)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}:{{port}}/api/user",
+              "host": ["{{base_url}}"],
+              "port": "{{port}}",
+              "path": ["api", "user"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "List Users",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}:{{port}}/api/users",
+              "host": ["{{base_url}}"],
+              "port": "{{port}}",
+              "path": ["api", "users"]
+            }
+          }
+        },
+        {
+          "name": "Create User",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Jane Doe\",\n  \"email\": \"janedoe@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}:{{port}}/api/users",
+              "host": ["{{base_url}}"],
+              "port": "{{port}}",
+              "path": ["api", "users"]
+            }
+          }
+        },
+        {
+          "name": "Show User",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}:{{port}}/api/users/1",
+              "host": ["{{base_url}}"],
+              "port": "{{port}}",
+              "path": ["api", "users", "1"]
+            }
+          }
+        },
+        {
+          "name": "Update User",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Jane Updated\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}:{{port}}/api/users/1",
+              "host": ["{{base_url}}"],
+              "port": "{{port}}",
+              "path": ["api", "users", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete User",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}:{{port}}/api/users/1",
+              "host": ["{{base_url}}"],
+              "port": "{{port}}",
+              "path": ["api", "users", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Roles",
+      "item": [
+        {
+          "name": "List Roles",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}:{{port}}/api/roles",
+              "host": ["{{base_url}}"],
+              "port": "{{port}}",
+              "path": ["api", "roles"]
+            }
+          }
+        },
+        {
+          "name": "Create Role",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Admin\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}:{{port}}/api/roles",
+              "host": ["{{base_url}}"],
+              "port": "{{port}}",
+              "path": ["api", "roles"]
+            }
+          }
+        },
+        {
+          "name": "Show Role",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}:{{port}}/api/roles/1",
+              "host": ["{{base_url}}"],
+              "port": "{{port}}",
+              "path": ["api", "roles", "1"]
+            }
+          }
+        },
+        {
+          "name": "Update Role",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Admin Updated\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}:{{port}}/api/roles/1",
+              "host": ["{{base_url}}"],
+              "port": "{{port}}",
+              "path": ["api", "roles", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete Role",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}:{{port}}/api/roles/1",
+              "host": ["{{base_url}}"],
+              "port": "{{port}}",
+              "path": ["api", "roles", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Types",
+      "item": [
+        {
+          "name": "List Types",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}:{{port}}/api/roles",
+              "host": ["{{base_url}}"],
+              "port": "{{port}}",
+              "path": ["api", "roles"]
+            }
+          }
+        },
+        {
+          "name": "Create Type",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Type Example\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}:{{port}}/api/roles",
+              "host": ["{{base_url}}"],
+              "port": "{{port}}",
+              "path": ["api", "roles"]
+            }
+          }
+        },
+        {
+          "name": "Show Type",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}:{{port}}/api/roles/1",
+              "host": ["{{base_url}}"],
+              "port": "{{port}}",
+              "path": ["api", "roles", "1"]
+            }
+          }
+        },
+        {
+          "name": "Update Type",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Type Updated\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}:{{port}}/api/roles/1",
+              "host": ["{{base_url}}"],
+              "port": "{{port}}",
+              "path": ["api", "roles", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete Type",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}:{{port}}/api/roles/1",
+              "host": ["{{base_url}}"],
+              "port": "{{port}}",
+              "path": ["api", "roles", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Statuses",
+      "item": [
+        {
+          "name": "List Statuses",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}:{{port}}/api/statuses",
+              "host": ["{{base_url}}"],
+              "port": "{{port}}",
+              "path": ["api", "statuses"]
+            }
+          }
+        },
+        {
+          "name": "Create Status",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Status Example\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}:{{port}}/api/statuses",
+              "host": ["{{base_url}}"],
+              "port": "{{port}}",
+              "path": ["api", "statuses"]
+            }
+          }
+        },
+        {
+          "name": "Show Status",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}:{{port}}/api/statuses/1",
+              "host": ["{{base_url}}"],
+              "port": "{{port}}",
+              "path": ["api", "statuses", "1"]
+            }
+          }
+        },
+        {
+          "name": "Update Status",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Status Updated\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}:{{port}}/api/statuses/1",
+              "host": ["{{base_url}}"],
+              "port": "{{port}}",
+              "path": ["api", "statuses", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete Status",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}:{{port}}/api/statuses/1",
+              "host": ["{{base_url}}"],
+              "port": "{{port}}",
+              "path": ["api", "statuses", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Genders",
+      "item": [
+        {
+          "name": "List Genders",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}:{{port}}/api/genders",
+              "host": ["{{base_url}}"],
+              "port": "{{port}}",
+              "path": ["api", "genders"]
+            }
+          }
+        },
+        {
+          "name": "Create Gender",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Gender Example\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}:{{port}}/api/genders",
+              "host": ["{{base_url}}"],
+              "port": "{{port}}",
+              "path": ["api", "genders"]
+            }
+          }
+        },
+        {
+          "name": "Show Gender",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}:{{port}}/api/genders/1",
+              "host": ["{{base_url}}"],
+              "port": "{{port}}",
+              "path": ["api", "genders", "1"]
+            }
+          }
+        },
+        {
+          "name": "Update Gender",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Gender Updated\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}:{{port}}/api/genders/1",
+              "host": ["{{base_url}}"],
+              "port": "{{port}}",
+              "path": ["api", "genders", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete Gender",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}:{{port}}/api/genders/1",
+              "host": ["{{base_url}}"],
+              "port": "{{port}}",
+              "path": ["api", "genders", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Authors",
+      "item": [
+        {
+          "name": "List Authors",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}:{{port}}/api/authors",
+              "host": ["{{base_url}}"],
+              "port": "{{port}}",
+              "path": ["api", "authors"]
+            }
+          }
+        },
+        {
+          "name": "Create Author",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Author Example\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}:{{port}}/api/authors",
+              "host": ["{{base_url}}"],
+              "port": "{{port}}",
+              "path": ["api", "authors"]
+            }
+          }
+        },
+        {
+          "name": "Show Author",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}:{{port}}/api/authors/1",
+              "host": ["{{base_url}}"],
+              "port": "{{port}}",
+              "path": ["api", "authors", "1"]
+            }
+          }
+        },
+        {
+          "name": "Update Author",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Author Updated\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}:{{port}}/api/authors/1",
+              "host": ["{{base_url}}"],
+              "port": "{{port}}",
+              "path": ["api", "authors", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete Author",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}:{{port}}/api/authors/1",
+              "host": ["{{base_url}}"],
+              "port": "{{port}}",
+              "path": ["api", "authors", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Categories",
+      "item": [
+        {
+          "name": "List Categories",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}:{{port}}/api/authors",
+              "host": ["{{base_url}}"],
+              "port": "{{port}}",
+              "path": ["api", "authors"]
+            }
+          }
+        },
+        {
+          "name": "Create Category",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Category Example\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}:{{port}}/api/authors",
+              "host": ["{{base_url}}"],
+              "port": "{{port}}",
+              "path": ["api", "authors"]
+            }
+          }
+        },
+        {
+          "name": "Show Category",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}:{{port}}/api/authors/1",
+              "host": ["{{base_url}}"],
+              "port": "{{port}}",
+              "path": ["api", "authors", "1"]
+            }
+          }
+        },
+        {
+          "name": "Update Category",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Category Updated\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}:{{port}}/api/authors/1",
+              "host": ["{{base_url}}"],
+              "port": "{{port}}",
+              "path": ["api", "authors", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete Category",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}:{{port}}/api/authors/1",
+              "host": ["{{base_url}}"],
+              "port": "{{port}}",
+              "path": ["api", "authors", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Editorials",
+      "item": [
+        {
+          "name": "List Editorials",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}:{{port}}/api/editorials",
+              "host": ["{{base_url}}"],
+              "port": "{{port}}",
+              "path": ["api", "editorials"]
+            }
+          }
+        },
+        {
+          "name": "Create Editorial",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Editorial Example\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}:{{port}}/api/editorials",
+              "host": ["{{base_url}}"],
+              "port": "{{port}}",
+              "path": ["api", "editorials"]
+            }
+          }
+        },
+        {
+          "name": "Show Editorial",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}:{{port}}/api/editorials/1",
+              "host": ["{{base_url}}"],
+              "port": "{{port}}",
+              "path": ["api", "editorials", "1"]
+            }
+          }
+        },
+        {
+          "name": "Update Editorial",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Editorial Updated\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}:{{port}}/api/editorials/1",
+              "host": ["{{base_url}}"],
+              "port": "{{port}}",
+              "path": ["api", "editorials", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete Editorial",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}:{{port}}/api/editorials/1",
+              "host": ["{{base_url}}"],
+              "port": "{{port}}",
+              "path": ["api", "editorials", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Collections",
+      "item": [
+        {
+          "name": "List Collections",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}:{{port}}/api/collections",
+              "host": ["{{base_url}}"],
+              "port": "{{port}}",
+              "path": ["api", "collections"]
+            }
+          }
+        },
+        {
+          "name": "Create Collection",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Collection Example\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}:{{port}}/api/collections",
+              "host": ["{{base_url}}"],
+              "port": "{{port}}",
+              "path": ["api", "collections"]
+            }
+          }
+        },
+        {
+          "name": "Show Collection",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}:{{port}}/api/collections/1",
+              "host": ["{{base_url}}"],
+              "port": "{{port}}",
+              "path": ["api", "collections", "1"]
+            }
+          }
+        },
+        {
+          "name": "Update Collection",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Collection Updated\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}:{{port}}/api/collections/1",
+              "host": ["{{base_url}}"],
+              "port": "{{port}}",
+              "path": ["api", "collections", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete Collection",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}:{{port}}/api/collections/1",
+              "host": ["{{base_url}}"],
+              "port": "{{port}}",
+              "path": ["api", "collections", "1"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
