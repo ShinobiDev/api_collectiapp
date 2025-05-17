@@ -11,6 +11,7 @@ use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EditorialController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CollectionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -105,4 +106,13 @@ Route::prefix('editorials')->group(function () {
     Route::get('/{id}', [EditorialController::class, 'show']);    // Ver editorial por ID
     Route::put('/{id}', [EditorialController::class, 'update']);  // Actualizar editorial
     Route::delete('/{id}', [EditorialController::class, 'destroy']); // Eliminar editorial
+});
+
+// Rutas para Colecciones
+Route::prefix('collections')->group(function () {
+    Route::get('/', [CollectionController::class, 'index']);       // Lista todos los colecciones
+    Route::post('/', [CollectionController::class, 'store']);      // Crear nuevo coleccion
+    Route::get('/{id}', [CollectionController::class, 'show']);    // Ver coleccion por ID
+    Route::put('/{id}', [CollectionController::class, 'update']);  // Actualizar coleccion
+    Route::delete('/{id}', [CollectionController::class, 'destroy']); // Eliminar coleccion
 });
