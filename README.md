@@ -45,6 +45,10 @@ Collectiapp es una API innovadora diseñada para transformar la manera en que lo
    ```bash
    php artisan serve
    ```
+- Actualizar documentación en swagger
+   ```bash
+   php artisan l5-swagger:generate
+   ```
 
 ## Uso
 
